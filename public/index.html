@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>docx-merger — Merge Word Documents Without Losing Formatting</title>
+  <meta name="description" content="An open-source JavaScript library that merges .docx files in Node.js and the browser, preserving styles, tables, images, and numbering." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ─── Nav ─── -->
+<nav class="nav">
+  <div class="nav__inner">
+    <div class="nav__brand">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+      </svg>
+      <span>docx-merger</span>
+    </div>
+    <div class="nav__links">
+      <a href="https://www.npmjs.com/package/docx-merger" target="_blank" rel="noopener" class="btn btn--ghost" style="font-size:12.5px;padding:6px 14px;">
+        <svg width="14" height="14" viewBox="0 0 18 7" fill="currentColor"><path d="M0 0h18v6H9V1H7v5H0z"/></svg>
+        npm
+      </a>
+      <a href="https://github.com/apurvaojas/docx-merger" target="_blank" rel="noopener" class="btn btn--ghost" style="font-size:12.5px;padding:6px 14px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── Hero ─── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__badge">
+      <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd"/></svg>
+      Open Source &nbsp;·&nbsp; MIT License &nbsp;·&nbsp; Node.js &amp; Browser
+    </div>
+    <h1>Merge Word Documents<br><span>Without Losing a Thing</span></h1>
+    <p>A JavaScript library that combines multiple .docx files into one, faithfully preserving styles, tables, images, and numbering.</p>
+    <div class="hero__cta">
+      <a href="#demo" class="btn btn--primary btn--lg">
+        Try the Demo
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"/></svg>
+      </a>
+      <a href="#usage" class="btn btn--ghost btn--lg">View Usage</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Features ─── -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="features__head">
+      <div class="section-label">What gets preserved</div>
+      <h2 class="section-title">Everything you'd expect to survive</h2>
+      <p class="section-sub">docx-merger goes beyond simple concatenation — rich document elements are correctly merged and remapped.</p>
+    </div>
+    <div class="features__grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"/>
+          </svg>
+        </div>
+        <h3>Styles &amp; Fonts</h3>
+        <p>Headings, paragraph styles, fonts, and colors transfer cleanly from every source document.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
+          </svg>
+        </div>
+        <h3>Images</h3>
+        <p>Embedded images are extracted, remapped, and correctly re-embedded in the output document.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0c0 .621.504 1.125 1.125 1.125h15c.621 0 1.125-.504 1.125-1.125m-19.5 0v6.75c0 .621.504 1.125 1.125 1.125h17.25"/>
+          </svg>
+        </div>
+        <h3>Tables</h3>
+        <p>Complex multi-column tables with borders, shading, and merged cells survive the merge intact.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.242 5.992h12m-12 6.003H20.24m-12 5.999h12M4.117 7.495v-3.75H2.99m1.125 3.75H2.99m1.125 0H5.24m-1.92 2.577a1.125 1.125 0 0 1 1.126 1.126v.176a1.125 1.125 0 0 1-.896 1.1l-.703.146a1.125 1.125 0 0 0-.39 2.073h1.99m0-8.01V6.375"/>
+          </svg>
+        </div>
+        <h3>Bullets &amp; Numbering</h3>
+        <p>List styles, numbering schemes, and indent levels are remapped so lists continue correctly.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Demo ─── -->
+<section class="demo-section" id="demo">
+  <div class="container">
+    <div class="demo-section__head">
+      <div class="section-label">Interactive Demo</div>
+      <h2 class="section-title">See it work in seconds</h2>
+      <p class="section-sub">Select two or more .docx files, set the order, and download your merged document — no signup required.</p>
+    </div>
+
+    <div class="demo-card">
+
+      <!-- Progress steps -->
+      <div class="steps">
+        <div class="step active" id="step1">
+          <div class="step__num">1</div>
+          <span>Add files</span>
+        </div>
+        <div class="step-divider"></div>
+        <div class="step" id="step2">
+          <div class="step__num">2</div>
+          <span>Set order</span>
+        </div>
+        <div class="step-divider"></div>
+        <div class="step" id="step3">
+          <div class="step__num">3</div>
+          <span>Download</span>
+        </div>
+      </div>
+
+      <!-- Drop zone -->
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-zone__icon">
+          <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m6.75 12-3-3m0 0-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+          </svg>
+        </div>
+        <p>Drop .docx files here</p>
+        <span>or click to browse &mdash; up to 3 files, 5&thinsp;MB each</span>
+        <input type="file" id="fileInput" accept=".docx" multiple />
+      </div>
+
+      <!-- File list -->
+      <div class="file-list-section" id="fileListSection">
+        <div class="file-list-header">
+          <h2>
+            <span id="fileCount">0 files</span> &mdash; drag rows or use arrows to reorder
+          </h2>
+          <button class="clear-btn" id="clearBtn">Clear all</button>
+        </div>
+        <ul class="file-list" id="fileList"></ul>
+      </div>
+
+      <!-- Merge -->
+      <div class="merge-row">
+        <button class="btn btn--primary btn--full" id="mergeBtn" disabled style="padding:14px;font-size:14px;">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/>
+          </svg>
+          Merge Documents
+        </button>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <!-- Result -->
+      <div id="status"></div>
+      <a class="btn btn--success btn--full download-btn" id="downloadBtn" download="merged.docx">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+        </svg>
+        Download merged.docx
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Usage / Install ─── -->
+<section class="usage-section" id="usage">
+  <div class="container">
+    <div class="usage-section__inner">
+
+      <div>
+        <div class="section-label">Get Started</div>
+        <h2 class="section-title">One install away</h2>
+        <p class="section-sub">Drop it into any Node.js project. Works with callbacks or promises, and has a browser build too.</p>
+
+        <div style="margin-top:28px;">
+          <div class="install-block">
+            <code>npm install docx-merger</code>
+            <button class="copy-btn" id="copyBtn">Copy</button>
+          </div>
+          <a href="https://github.com/apurvaojas/docx-merger" target="_blank" rel="noopener" class="btn btn--ghost" style="font-size:13px;">
+            View full docs on GitHub
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <pre><span class="c">// Node.js usage</span>
+<span class="k">const</span> DocxMerger <span class="k">=</span> <span class="fn">require</span>(<span class="s">'docx-merger'</span>);
+<span class="k">const</span> fs <span class="k">=</span> <span class="fn">require</span>(<span class="s">'fs'</span>);
+
+<span class="k">const</span> files <span class="k">=</span> [<span class="s">'doc1.docx'</span>, <span class="s">'doc2.docx'</span>]
+  .<span class="fn">map</span>(f <span class="k">=></span> fs.<span class="fn">readFileSync</span>(f, <span class="s">'binary'</span>));
+
+<span class="k">const</span> docx <span class="k">=</span> <span class="k">new</span> <span class="fn">DocxMerger</span>({}, files);
+
+docx.<span class="fn">save</span>(<span class="s">'nodebuffer'</span>, (data) <span class="k">=></span> {
+  fs.<span class="fn">writeFileSync</span>(<span class="s">'merged.docx'</span>, data);
+});</pre>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+      </svg>
+      docx-merger
+    </div>
+    <div class="footer__links">
+      <a href="https://www.npmjs.com/package/docx-merger" target="_blank" rel="noopener">npm</a>
+      <a href="https://github.com/apurvaojas/docx-merger" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/apurvaojas/docx-merger/issues" target="_blank" rel="noopener">Issues</a>
+    </div>
+    <div class="footer__copy">MIT License &nbsp;·&nbsp; Built with docx-merger</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
