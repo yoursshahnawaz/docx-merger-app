@@ -160,58 +160,80 @@ a { color: inherit; text-decoration: none; }
 
 /* ─── npm Stats strip ─── */
 .stats-strip {
-  background: var(--gray-50);
-  border-top: 1px solid var(--gray-200);
-  border-bottom: 1px solid var(--gray-200);
-  padding: 28px 24px;
+  background: #080f1e;
+  padding: 52px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.stats-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(37,99,235,.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 80% 50%, rgba(124,58,237,.10) 0%, transparent 70%);
+  pointer-events: none;
 }
 .stats-grid {
-  max-width: 1080px;
+  max-width: 900px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  position: relative;
 }
 .stat-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 6px 44px;
-  border-right: 1px solid var(--gray-200);
+  padding: 8px 52px;
+  border-right: 1px solid rgba(255,255,255,.07);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .5s ease, transform .5s ease;
+  transition-delay: calc(var(--i) * 100ms);
 }
 .stat-item:last-child { border-right: none; }
+.stats-strip.revealed .stat-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Icons */
+.stat-icon {
+  width: 42px; height: 42px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.stat-icon--blue   { background: rgba(96,165,250,.15);  color: #60a5fa; }
+.stat-icon--green  { background: rgba(52,211,153,.15);  color: #34d399; }
+.stat-icon--violet { background: rgba(167,139,250,.15); color: #a78bfa; }
+.stat-icon--amber  { background: rgba(251,191,36,.15);  color: #fbbf24; }
+
+/* Numbers */
 .stat-val {
-  font-size: 26px;
+  font-size: 34px;
   font-weight: 800;
-  color: var(--gray-900);
   letter-spacing: -.5px;
   font-variant-numeric: tabular-nums;
-  line-height: 1.2;
+  line-height: 1;
+  margin-bottom: 8px;
 }
-.stat-val.loading {
-  color: transparent;
-  background: var(--gray-200);
-  border-radius: 5px;
-  min-width: 72px;
-  animation: stat-pulse 1.4s ease-in-out infinite;
-}
-@keyframes stat-pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: .4; }
-}
+.stat-val--blue   { color: #60a5fa; }
+.stat-val--green  { color: #34d399; }
+.stat-val--violet { color: #a78bfa; }
+.stat-val--amber  { color: #fbbf24; }
+
 .stat-label {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  color: var(--gray-400);
+  color: rgba(255,255,255,.35);
   text-transform: uppercase;
-  letter-spacing: .7px;
-  margin-top: 5px;
-}
-@media (max-width: 560px) {
-  .stat-item { padding: 12px 0; width: 50%; border-right: none; border-bottom: 1px solid var(--gray-200); }
-  .stat-item:nth-child(odd) { border-right: 1px solid var(--gray-200); }
-  .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+  letter-spacing: .9px;
 }
 
 /* ─── Features ─── */
@@ -628,7 +650,8 @@ a { color: inherit; text-decoration: none; }
   .features,
   .demo-section,
   .usage-section { padding: 64px 0; }
-  .stat-item { padding: 6px 28px; }
+  .stat-item { padding: 8px 32px; }
+  .stat-val { font-size: 28px; }
 }
 
 /* Mobile */
@@ -652,10 +675,12 @@ a { color: inherit; text-decoration: none; }
   .feature-card { padding: 20px 16px; }
 
   /* Stats strip */
-  .stat-item { padding: 10px 0; width: 50%; border-right: none; border-bottom: 1px solid var(--gray-200); }
-  .stat-item:nth-child(odd)  { border-right: 1px solid var(--gray-200); }
+  .stats-strip { padding: 36px 16px; }
+  .stat-item { padding: 16px 0; width: 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .stat-item:nth-child(odd)      { border-right: 1px solid rgba(255,255,255,.07); }
   .stat-item:nth-last-child(-n+2) { border-bottom: none; }
-  .stat-val { font-size: 22px; }
+  .stat-val { font-size: 28px; }
+  .stat-icon { width: 36px; height: 36px; margin-bottom: 12px; }
 
   /* Steps — numbers only, labels hidden */
   .step span { display: none; }

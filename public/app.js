@@ -278,6 +278,20 @@
   }
 
   // ── npm stats ──
+  let pendingStats = null;
+  let statsRevealed = false;
+  const statsStrip = document.getElementById('statsStrip');
+
+  // Reveal cards + trigger count-up when strip enters viewport
+  const statsObserver = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    statsObserver.disconnect();
+    statsStrip.classList.add('revealed');
+    if (pendingStats) runCountUp(pendingStats);
+    statsRevealed = true;
+  }, { threshold: 0.2 });
+  if (statsStrip) statsObserver.observe(statsStrip);
+
   async function loadNpmStats() {
     try {
       const [weekly, monthly, pkg] = await Promise.all([
@@ -285,17 +299,35 @@
         fetch('https://api.npmjs.org/downloads/point/last-month/docx-merger').then(r => r.json()),
         fetch('https://registry.npmjs.org/docx-merger/latest').then(r => r.json()),
       ]);
-      setStat('statVersion', `v${pkg.version}`);
-      setStat('statWeekly',  fmtNum(weekly.downloads));
-      setStat('statMonthly', fmtNum(monthly.downloads));
+
+      const data = { weekly: weekly.downloads, monthly: monthly.downloads, version: pkg.version };
+      document.getElementById('statVersion').textContent = `v${pkg.version}`;
+
+      if (statsRevealed) runCountUp(data);
+      else pendingStats = data;
+
     } catch {
-      ['statVersion', 'statWeekly', 'statMonthly'].forEach(id => setStat(id, '—'));
+      ['statWeekly', 'statMonthly'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = '—';
+      });
     }
   }
 
-  function setStat(id, val) {
-    const el = document.getElementById(id);
-    if (el) { el.textContent = val; el.classList.remove('loading'); }
+  function runCountUp({ weekly, monthly }) {
+    countUp(document.getElementById('statWeekly'),  weekly,  1400);
+    countUp(document.getElementById('statMonthly'), monthly, 1900);
+  }
+
+  function countUp(el, target, duration) {
+    if (!el) return;
+    const start = performance.now();
+    (function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 4); // ease-out quart
+      el.textContent = fmtNum(Math.round(target * eased));
+      if (t < 1) requestAnimationFrame(tick);
+    })(performance.now());
   }
 
   function fmtNum(n) {
