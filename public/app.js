@@ -277,6 +277,35 @@
     return (b / (1024 * 1024)).toFixed(1) + ' MB';
   }
 
+  // ── npm stats ──
+  async function loadNpmStats() {
+    try {
+      const [weekly, monthly, pkg] = await Promise.all([
+        fetch('https://api.npmjs.org/downloads/point/last-week/docx-merger').then(r => r.json()),
+        fetch('https://api.npmjs.org/downloads/point/last-month/docx-merger').then(r => r.json()),
+        fetch('https://registry.npmjs.org/docx-merger/latest').then(r => r.json()),
+      ]);
+      setStat('statVersion', `v${pkg.version}`);
+      setStat('statWeekly',  fmtNum(weekly.downloads));
+      setStat('statMonthly', fmtNum(monthly.downloads));
+    } catch {
+      ['statVersion', 'statWeekly', 'statMonthly'].forEach(id => setStat(id, '—'));
+    }
+  }
+
+  function setStat(id, val) {
+    const el = document.getElementById(id);
+    if (el) { el.textContent = val; el.classList.remove('loading'); }
+  }
+
+  function fmtNum(n) {
+    if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
+    if (n >= 1e3) return (n / 1e3).toFixed(1) + 'k';
+    return n.toLocaleString();
+  }
+
+  loadNpmStats();
+
   // ── Copy button ──
   const copyBtn = document.getElementById('copyBtn');
   if (copyBtn) {
