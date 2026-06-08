@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: docx-merger-app
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MAX_FILE_SIZE_MB
+        value: 5
+      - key: MAX_FILES
+        value: 3
+      - key: RATE_LIMIT
+        value: 30
