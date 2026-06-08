@@ -621,8 +621,71 @@ a { color: inherit; text-decoration: none; }
 .footer__copy { font-size: 12px; width: 100%; text-align: center; margin-top: 8px; color: #475569; }
 
 /* ─── Responsive ─── */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .hero { padding: 72px 0 56px; }
+  .features,
+  .demo-section,
+  .usage-section { padding: 64px 0; }
+  .stat-item { padding: 6px 28px; }
+}
+
+/* Mobile */
 @media (max-width: 520px) {
-  .demo-card { padding: 24px 18px; }
-  .hero { padding: 64px 0 56px; }
-  .nav__brand span { display: none; }
+  /* Nav — always show brand, drop links (they're in the footer) */
+  .nav__inner { padding: 0 16px; }
+  .nav__links { display: none; }
+
+  /* Hero */
+  .hero { padding: 48px 0 40px; }
+  .hero__badge { font-size: 11px; padding: 4px 10px; }
+  .hero p { font-size: 15px; }
+  .hero__cta { flex-direction: column; align-items: center; gap: 10px; }
+  .hero__cta .btn { width: 100%; max-width: 300px; }
+
+  /* Sections */
+  .features,
+  .demo-section,
+  .usage-section { padding: 52px 0; }
+  .features__head { margin-bottom: 32px; }
+  .feature-card { padding: 20px 16px; }
+
+  /* Stats strip */
+  .stat-item { padding: 10px 0; width: 50%; border-right: none; border-bottom: 1px solid var(--gray-200); }
+  .stat-item:nth-child(odd)  { border-right: 1px solid var(--gray-200); }
+  .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+  .stat-val { font-size: 22px; }
+
+  /* Steps — numbers only, labels hidden */
+  .step span { display: none; }
+  .step-divider { width: 12px; margin: 0 2px; }
+
+  /* Demo card */
+  .demo-card { padding: 20px 14px; }
+
+  /* File items — no drag handle (touch can't drag), hide size */
+  .drag-handle { display: none; }
+  .file-size   { display: none; }
+  .file-name   { font-size: 12.5px; }
+
+  /* Merge button */
+  .merge-row { margin-top: 18px; }
+
+  /* Usage section */
+  .usage-section__inner { gap: 32px; }
+  .install-block code { font-size: 12.5px; }
+  .code-block { padding: 16px; }
+  .code-block pre { font-size: 12px; }
+
+  /* Footer */
+  .footer__inner { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .footer__copy  { text-align: left; margin-top: 0; }
+}
+
+/* Extra small (SE, Galaxy A-series) */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 26px; }
+  .demo-card { padding: 18px 12px; }
+  .stat-val { font-size: 20px; }
 }
