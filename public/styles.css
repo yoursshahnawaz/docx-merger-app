@@ -100,6 +100,25 @@ a { color: inherit; text-decoration: none; }
 .nav__brand svg { color: var(--blue); }
 .nav__links { display: flex; align-items: center; gap: 8px; }
 
+/* Mobile menu toggle — hidden on desktop, shown ≤520px */
+.nav__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 36px;
+  background: transparent;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 9px;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.nav__toggle:hover { background: var(--gray-50); border-color: var(--gray-400); }
+.nav__toggle-close { display: none; }
+.nav.open .nav__toggle-open  { display: none; }
+.nav.open .nav__toggle-close { display: block; }
+
 /* ─── Hero ─── */
 .hero {
   background: linear-gradient(160deg, var(--blue-light) 0%, #fff 55%);
@@ -656,9 +675,26 @@ a { color: inherit; text-decoration: none; }
 
 /* Mobile */
 @media (max-width: 520px) {
-  /* Nav — always show brand, drop links (they're in the footer) */
+  /* Nav — collapse links into a tappable dropdown menu */
   .nav__inner { padding: 0 16px; }
-  .nav__links { display: none; }
+  .nav__toggle { display: inline-flex; }
+  .nav__links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    box-shadow: var(--shadow);
+  }
+  .nav.open .nav__links { display: flex; }
+  .nav__links .btn { width: 100%; justify-content: center; padding: 11px 14px; font-size: 13.5px; }
 
   /* Hero */
   .hero { padding: 48px 0 40px; }
